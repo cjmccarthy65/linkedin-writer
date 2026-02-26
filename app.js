@@ -144,9 +144,15 @@ function bindEvents() {
         if (state.generatedPost) regenerateInfographic();
     });
 
-    // Theme pill active state — JS-driven for reliable selection across all themes
-    document.querySelectorAll('input[name="infoTheme"]').forEach(radio => {
-        radio.addEventListener('change', () => setActiveThemePill(radio.value));
+    // Theme pill clicks — attach directly to pill spans for reliable click areas
+    document.querySelectorAll('.theme-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            const radio = pill.previousElementSibling;
+            if (radio) {
+                radio.checked = true;
+                setActiveThemePill(radio.value);
+            }
+        });
     });
     const defaultTheme = document.querySelector('input[name="infoTheme"]:checked');
     if (defaultTheme) setActiveThemePill(defaultTheme.value);
