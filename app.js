@@ -144,13 +144,15 @@ function bindEvents() {
         if (state.generatedPost) regenerateInfographic();
     });
 
-    // Theme pill clicks — attach directly to pill spans for reliable click areas
+    // Theme pill clicks — use data-theme to avoid DOM traversal and label double-activation
     document.querySelectorAll('.theme-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-            const radio = pill.previousElementSibling;
-            if (radio) {
-                radio.checked = true;
-                setActiveThemePill(radio.value);
+        pill.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const theme = pill.dataset.theme;
+            if (theme) {
+                const radio = document.querySelector(`input[name="infoTheme"][value="${theme}"]`);
+                if (radio) radio.checked = true;
+                setActiveThemePill(theme);
             }
         });
     });
@@ -176,8 +178,8 @@ function bindEvents() {
 
 function setActiveThemePill(value) {
     document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
-    const radio = document.querySelector(`input[name="infoTheme"][value="${value}"]`);
-    if (radio) radio.nextElementSibling.classList.add('active');
+    const pill = document.querySelector(`.theme-pill[data-theme="${value}"]`);
+    if (pill) pill.classList.add('active');
 }
 
 function switchTab(name) {
