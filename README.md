@@ -16,12 +16,26 @@ Generate professional, engaging LinkedIn posts in your unique writing style usin
 
 ## Infographic Themes
 
-| Theme | Description |
-|---|---|
-| **Shock** | Dark background, fiery orange/gold, high-impact editorial style |
-| **Dark** | Near-black, gold accents, cinematic illustration |
-| **Light** | Clean off-white, professional editorial layout |
-| **Sign** | Minimalist typographic white sign on wall |
+<table>
+  <tr>
+    <td align="center"><b>Shock</b></td>
+    <td align="center"><b>Cinematic Dark</b></td>
+    <td align="center"><b>Cinematic Light</b></td>
+    <td align="center"><b>Sign</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/shock.png" width="180"/></td>
+    <td><img src="screenshots/cinematic-dark.png" width="180"/></td>
+    <td><img src="screenshots/cinematic-light.png" width="180"/></td>
+    <td><img src="screenshots/sign.png" width="180"/></td>
+  </tr>
+  <tr>
+    <td>Dark bg, fiery orange/gold, high-impact editorial</td>
+    <td>Near-black, gold accents, cinematic illustration</td>
+    <td>Clean off-white, professional editorial layout</td>
+    <td>Minimalist typographic white sign on wall</td>
+  </tr>
+</table>
 
 ## Getting Started
 
