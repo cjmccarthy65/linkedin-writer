@@ -2,6 +2,8 @@
 
 Generate professional, engaging LinkedIn posts in your unique writing style using AI. Includes automatic infographic creation, web research, post analysis, and draft management — all from a clean, no-install web app.
 
+![LinkedIn Writer screenshot](screenshots/app-screenshot.png)
+
 ## Features
 
 - **AI Post Generation** — Write compelling LinkedIn posts from a topic or article URLs, matched to your writing style
