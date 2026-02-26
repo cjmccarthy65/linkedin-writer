@@ -140,8 +140,16 @@ function bindEvents() {
         const cycle = { shock: 'dark', dark: 'light', light: 'sign', sign: 'shock' };
         const next = cycle[current] || 'shock';
         document.querySelector(`input[name="infoTheme"][value="${next}"]`).checked = true;
+        setActiveThemePill(next);
         if (state.generatedPost) regenerateInfographic();
     });
+
+    // Theme pill active state — JS-driven for reliable selection across all themes
+    document.querySelectorAll('input[name="infoTheme"]').forEach(radio => {
+        radio.addEventListener('change', () => setActiveThemePill(radio.value));
+    });
+    const defaultTheme = document.querySelector('input[name="infoTheme"]:checked');
+    if (defaultTheme) setActiveThemePill(defaultTheme.value);
 
     // Post output char count
     els.postOutput.addEventListener('input', updateCharCount);
@@ -158,6 +166,12 @@ function bindEvents() {
     els.resetStylePostBtn.addEventListener('click', () => {
         els.stylePost.value = DEFAULT_STYLE_POST;
     });
+}
+
+function setActiveThemePill(value) {
+    document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
+    const radio = document.querySelector(`input[name="infoTheme"][value="${value}"]`);
+    if (radio) radio.nextElementSibling.classList.add('active');
 }
 
 function switchTab(name) {

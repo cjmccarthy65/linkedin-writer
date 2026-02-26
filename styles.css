@@ -493,35 +493,28 @@ select.field-input option {
     height: 15px;
 }
 
-.dark-option input:checked~.theme-pill,
-.dark-option .theme-pill:has(~:checked) {
+.dark-option .theme-pill.active {
     background: #1a2332;
     border-color: #1a2332;
     color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-.dark-option input:checked+.theme-pill {
-    background: #1a2332;
-    border-color: #1a2332;
-    color: #fff;
-}
-
-.shock-option input:checked+.theme-pill {
+.shock-option .theme-pill.active {
     background: linear-gradient(135deg, #CC3700, #FF6B00);
     border-color: #FF6B00;
     color: #fff;
     box-shadow: 0 2px 10px rgba(255, 107, 0, 0.45);
 }
 
-.light-option input:checked+.theme-pill {
+.light-option .theme-pill.active {
     background: var(--li-blue);
     border-color: var(--li-blue);
     color: #fff;
     box-shadow: 0 2px 8px rgba(0, 119, 181, 0.35);
 }
 
-.sign-option input:checked+.theme-pill {
+.sign-option .theme-pill.active {
     background: #f5f5f5;
     border-color: #222;
     color: #111;
