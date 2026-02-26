@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn Post Generator</title>
+  <meta name="description" content="Generate professional LinkedIn posts from articles using AI. Supports OpenAI and Anthropic Claude." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <span>LinkedIn<strong>Writer</strong></span>
+      </div>
+      <nav class="tabs" id="mainTabs">
+        <button class="tab active" data-tab="generate" id="tab-generate">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+          Generate Post
+        </button>
+        <button class="tab" data-tab="analyze" id="tab-analyze">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+          Analyze Writing
+        </button>
+        <button class="tab" data-tab="settings" id="tab-settings">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+          Settings
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Create Professional LinkedIn Posts</h1>
+    <p>Generate engaging content in your unique writing style using AI</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- ═══════════════════════════════ GENERATE TAB ═══════════════════════════════ -->
+    <div class="tab-content active" data-panel="generate">
+      <div class="content-grid">
+
+        <!-- LEFT: FORM -->
+        <div class="card form-card">
+          <div class="card-header">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+            Post Generation
+          </div>
+
+          <div class="form-body">
+
+            <!-- Topic -->
+            <div class="field-group">
+              <label for="topic" class="field-label">Topic</label>
+              <input type="text" id="topic" class="field-input" placeholder="Why is AI important to Enterprises" />
+            </div>
+
+            <!-- Post Title -->
+            <div class="field-group">
+              <label for="postTitle" class="field-label">Post Title <span class="label-hint">(optional — used as the opening headline)</span></label>
+              <input type="text" id="postTitle" class="field-input" placeholder="e.g. Why AI Is the New Competitive Advantage" />
+            </div>
+
+            <!-- Article URLs -->
+            <div class="field-group">
+              <label class="field-label">Article URLs <span class="label-hint">(1–2 articles)</span></label>
+              <div id="urlList" class="url-list">
+                <div class="url-row" id="urlRow0">
+                  <input type="url" class="field-input url-input" placeholder="https://example.com/article" />
+                  <button class="btn-icon remove-url" title="Remove URL" style="display:none">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                  </button>
+                </div>
+              </div>
+              <button class="btn-add-url" id="addUrlBtn">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+                Add Article URL
+              </button>
+            </div>
+
+            <!-- Role / Persona -->
+            <div class="field-group">
+              <label for="roleContext" class="field-label">Your Role & Context</label>
+              <textarea id="roleContext" class="field-input field-textarea" rows="3" placeholder="e.g. I'm a Senior Product Manager at a B2B SaaS company focused on AI tools. My audience is business leaders and tech professionals. I write in a confident but conversational tone."></textarea>
+            </div>
+
+            <!-- Options Row -->
+            <div class="options-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="chkWebResearch" checked />
+                <span class="checkbox-custom"></span>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+                Enable Web Research
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="chkInfographic" checked />
+                <span class="checkbox-custom"></span>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/></svg>
+                Generate Infographic
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="chkDraft" />
+                <span class="checkbox-custom"></span>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/></svg>
+                Save as Draft
+              </label>
+            </div>
+
+            <!-- Infographic Theme (shown only when infographic is checked) -->
+            <div class="infographic-options" id="infographicOptions">
+              <div class="infographic-title-row">
+                <label for="infographicTitle" class="field-label">Infographic Title <span class="field-hint">optional — overrides auto-generated headline</span></label>
+                <input type="text" id="infographicTitle" class="field-input" placeholder="Leave blank to use post title, topic, or auto-extracted headline" />
+              </div>
+              <div class="infographic-theme-row">
+              <span class="field-label">Theme</span>
+              <div class="theme-toggle">
+                <label class="theme-option shock-option">
+                  <input type="radio" name="infoTheme" value="shock" checked />
+                  <span class="theme-pill">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                    Shock
+                  </span>
+                </label>
+                <label class="theme-option dark-option">
+                  <input type="radio" name="infoTheme" value="dark" />
+                  <span class="theme-pill">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                    Dark
+                  </span>
+                </label>
+                <label class="theme-option light-option">
+                  <input type="radio" name="infoTheme" value="light" />
+                  <span class="theme-pill">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+                    Light
+                  </span>
+                </label>
+                <label class="theme-option sign-option">
+                  <input type="radio" name="infoTheme" value="sign" />
+                  <span class="theme-pill">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/></svg>
+                    Sign
+                  </span>
+                </label>
+              </div>
+              </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button class="btn-generate" id="generateBtn">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+              Generate Post
+            </button>
+
+          </div><!-- /form-body -->
+        </div>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="sidebar">
+
+          <!-- Quick Tips -->
+          <div class="card tips-card">
+            <div class="card-header tips-header">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+              Quick Tips
+            </div>
+            <div class="tips-body">
+              <div class="tip-item">
+                <div class="tip-icon">💡</div>
+                <div>
+                  <strong>Topic Ideas</strong>
+                  <p>Industry trends, professional insights, leadership experiences, or technology updates work well.</p>
+                </div>
+              </div>
+              <div class="tip-item">
+                <div class="tip-icon">🔗</div>
+                <div>
+                  <strong>Article URLs</strong>
+                  <p>Add relevant articles or reports to incorporate current data and insights into your post.</p>
+                </div>
+              </div>
+              <div class="tip-item">
+                <div class="tip-icon">🎨</div>
+                <div>
+                  <strong>Infographics</strong>
+                  <p>Professional images can increase engagement by up to 2x. Choose dark for premium feel.</p>
+                </div>
+              </div>
+              <div class="tip-item">
+                <div class="tip-icon">🧑‍💼</div>
+                <div>
+                  <strong>Role Context</strong>
+                  <p>The more detail you add about your role and audience, the more on-brand your post will be.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Draft Box -->
+          <div class="card draft-card" id="draftBox" style="display:none">
+            <div class="card-header">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+              Saved Drafts
+            </div>
+            <div id="draftList" class="draft-list"></div>
+          </div>
+
+        </aside>
+      </div>
+
+      <!-- OUTPUT PANEL -->
+      <div class="output-panel" id="outputPanel" style="display:none">
+
+        <div class="output-cols">
+
+          <!-- Post Text -->
+          <div class="card output-card">
+            <div class="card-header">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 000 2h3a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+              Generated Post
+              <div class="output-actions">
+                <button class="btn-sm" id="copyBtn" title="Copy to clipboard">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>
+                  Copy
+                </button>
+                <button class="btn-sm" id="regenerateBtn" title="Regenerate post">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg>
+                  Regenerate
+                </button>
+              </div>
+            </div>
+            <div class="post-preview" id="postOutput" contenteditable="true" spellcheck="true"></div>
+            <div class="char-count" id="charCount">0 characters</div>
+          </div>
+
+          <!-- Infographic Preview -->
+          <div class="card infographic-card" id="infographicCard" style="display:none">
+            <div class="card-header">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/></svg>
+              Infographic Preview
+              <div class="output-actions">
+                <button class="btn-sm" id="rethemeBtn" title="Switch theme">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                  Switch Theme
+                </button>
+                <button class="btn-sm btn-download" id="downloadBtn" title="Download PNG">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                  Download PNG
+                </button>
+              </div>
+            </div>
+            <div class="infographic-wrapper">
+              <canvas id="infographicCanvas"></canvas>
+            </div>
+          </div>
+
+          <div class="card prompts-card" id="promptsCard" style="display:none">
+            <div class="card-header">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              AI Prompts
+            </div>
+            <div class="prompts-body">
+              <p class="prompt-label">Post — System Prompt</p>
+              <textarea id="promptPostSystem" class="prompt-text" readonly></textarea>
+              <p class="prompt-label">Post — User Prompt</p>
+              <textarea id="promptPostUser" class="prompt-text" readonly></textarea>
+              <p class="prompt-label">Image Prompt (gpt-image-1)</p>
+              <textarea id="promptImage" class="prompt-text" readonly></textarea>
+            </div>
+          </div>
+
+        </div><!-- /output-cols -->
+      </div><!-- /output-panel -->
+
+    </div><!-- /generate tab content -->
+
+    <!-- ═══════════════════════════════ ANALYZE TAB ═══════════════════════════════ -->
+    <div class="tab-content" data-panel="analyze">
+      <div class="content-grid">
+        <div class="card form-card">
+          <div class="card-header">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+            Analyze Writing
+          </div>
+          <div class="form-body">
+            <div class="field-group">
+              <label for="analyzeInput" class="field-label">Paste Your LinkedIn Post</label>
+              <textarea id="analyzeInput" class="field-input field-textarea" rows="8" placeholder="Paste an existing LinkedIn post here to get AI feedback on engagement, tone, structure, and improvement suggestions..."></textarea>
+            </div>
+            <button class="btn-generate" id="analyzeBtn">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+              Analyze Post
+            </button>
+            <div class="card analyze-result" id="analyzeResult" style="display:none">
+              <div id="analyzeOutput"></div>
+            </div>
+          </div>
+        </div>
+        <aside class="sidebar">
+          <div class="card tips-card">
+            <div class="card-header tips-header">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+              Analysis Covers
+            </div>
+            <div class="tips-body">
+              <div class="tip-item"><div class="tip-icon">📊</div><div><strong>Engagement Score</strong><p>How likely your post is to get likes, comments, and shares.</p></div></div>
+              <div class="tip-item"><div class="tip-icon">🎯</div><div><strong>Hook Strength</strong><p>Whether your opening line stops the scroll.</p></div></div>
+              <div class="tip-item"><div class="tip-icon">📝</div><div><strong>Structure</strong><p>Readability, paragraph length, and use of whitespace.</p></div></div>
+              <div class="tip-item"><div class="tip-icon">✅</div><div><strong>Action Items</strong><p>Specific improvements you can apply immediately.</p></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════ SETTINGS TAB ═══════════════════════════════ -->
+    <div class="tab-content" data-panel="settings">
+      <div class="content-grid">
+        <div class="card form-card">
+          <div class="card-header">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+            API & Preferences
+          </div>
+          <div class="form-body settings-form">
+
+            <!-- Provider Select -->
+            <div class="field-group">
+              <label for="aiProvider" class="field-label">AI Provider</label>
+              <select id="aiProvider" class="field-input field-select">
+                <option value="openai">OpenAI (GPT-4o)</option>
+                <option value="anthropic">Anthropic (Claude 3.5 Sonnet)</option>
+              </select>
+            </div>
+
+            <!-- OpenAI Key -->
+            <div class="field-group" id="openaiKeyGroup">
+              <label for="openaiKey" class="field-label">OpenAI API Key</label>
+              <div class="api-key-row">
+                <input type="password" id="openaiKey" class="field-input" placeholder="sk-..." autocomplete="off" />
+                <button class="btn-icon" id="toggleOpenaiKey" title="Show/hide key">
+                  <svg viewBox="0 0 20 20" fill="currentColor" id="eyeOpenai"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+                </button>
+              </div>
+              <p class="field-hint">Your key is stored locally and never shared.</p>
+            </div>
+
+            <!-- Anthropic Key -->
+            <div class="field-group" id="anthropicKeyGroup" style="display:none">
+              <label for="anthropicKey" class="field-label">Anthropic API Key</label>
+              <div class="api-key-row">
+                <input type="password" id="anthropicKey" class="field-input" placeholder="sk-ant-..." autocomplete="off" />
+                <button class="btn-icon" id="toggleAnthropicKey" title="Show/hide key">
+                  <svg viewBox="0 0 20 20" fill="currentColor" id="eyeAnthropic"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+                </button>
+              </div>
+              <p class="field-hint">Your key is stored locally and never shared.</p>
+            </div>
+
+            <hr class="settings-divider" />
+
+            <!-- Writing Tone -->
+            <div class="field-group">
+              <label for="writingTone" class="field-label">Writing Tone</label>
+              <select id="writingTone" class="field-input field-select">
+                <option value="professional">Professional & Authoritative</option>
+                <option value="conversational" selected>Conversational & Engaging</option>
+                <option value="inspirational">Inspirational & Motivational</option>
+                <option value="analytical">Analytical & Data-Driven</option>
+                <option value="storytelling">Storytelling & Personal</option>
+              </select>
+            </div>
+
+            <!-- Post Length -->
+            <div class="field-group">
+              <label for="postLength" class="field-label">
+                Post Length: <span id="postLengthLabel">Medium (800–1200 chars)</span>
+              </label>
+              <input type="range" id="postLength" class="field-range" min="1" max="3" step="1" value="2" />
+              <div class="range-labels">
+                <span>Short</span><span>Medium</span><span>Long</span>
+              </div>
+            </div>
+
+            <!-- Emoji Toggle -->
+            <div class="field-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="chkEmoji" checked />
+                <span class="checkbox-custom"></span>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"/></svg>
+                Include relevant emojis in post
+              </label>
+            </div>
+            <div class="field-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="chkHashtags" checked />
+                <span class="checkbox-custom"></span>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM9.03 8l-1 4h2.938l1-4H9.031z" clip-rule="evenodd"/></svg>
+                Add hashtags at the end
+              </label>
+            </div>
+
+            <div class="field-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="chkShowPrompts" />
+                <span class="checkbox-custom"></span>
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                Show AI prompts after generation
+              </label>
+            </div>
+
+            <hr class="settings-divider" />
+
+            <!-- Writing Style Example -->
+            <div class="field-group">
+              <label for="stylePost" class="field-label">
+                Writing Style Example
+                <span class="label-hint">(AI will mirror this post's voice and structure)</span>
+              </label>
+              <textarea id="stylePost" class="field-input field-textarea" rows="8" placeholder="Paste a post that represents your writing style…"></textarea>
+              <button type="button" class="btn-text-sm" id="resetStylePostBtn">↩ Reset to default</button>
+            </div>
+
+            <button class="btn-generate" id="saveSettingsBtn">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293z"/></svg>
+              Save Settings
+            </button>
+            <div class="save-feedback" id="saveFeedback" style="display:none">✅ Settings saved!</div>
+
+          </div>
+        </div>
+        <aside class="sidebar">
+          <div class="card tips-card">
+            <div class="card-header tips-header">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+              API Keys
+            </div>
+            <div class="tips-body">
+              <div class="tip-item"><div class="tip-icon">🔑</div><div><strong>OpenAI</strong><p>Get your key at <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com</a>. Uses GPT-4o model.</p></div></div>
+              <div class="tip-item"><div class="tip-icon">🤖</div><div><strong>Anthropic</strong><p>Get your key at <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a>. Uses Claude 3.5 Sonnet.</p></div></div>
+              <div class="tip-item"><div class="tip-icon">🔒</div><div><strong>Security</strong><p>Keys are stored in your browser's local storage only. Clear browser data to remove them.</p></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loadingOverlay" style="display:none">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <p class="loading-text" id="loadingText">Generating your LinkedIn post…</p>
+      <p class="loading-sub" id="loadingSub">Fetching articles and crafting content</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

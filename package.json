@@ -1,0 +1,9 @@
+{
+  "name": "linkedin-writer",
+  "version": "1.0.0",
+  "description": "LinkedIn Post Generator — AI-powered with OpenAI & Anthropic support",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000"
+  }
+}
