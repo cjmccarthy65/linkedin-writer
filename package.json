@@ -4,6 +4,10 @@
   "description": "LinkedIn Post Generator — AI-powered with OpenAI & Anthropic support",
   "scripts": {
     "dev": "npx serve . -p 3000",
-    "start": "npx serve . -p 3000"
+    "start": "npx serve . -p 3000",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0"
   }
 }

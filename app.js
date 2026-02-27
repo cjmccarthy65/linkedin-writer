@@ -137,7 +137,7 @@ function bindEvents() {
     // Retheme infographic — cycle through all themes
     els.rethemeBtn.addEventListener('click', () => {
         const current = document.querySelector('input[name="infoTheme"]:checked').value;
-        const cycle = { shock: 'dark', dark: 'light', light: 'sign', sign: 'shock' };
+        const cycle = { shock: 'dark', dark: 'light', light: 'sign', sign: 'cylinder', cylinder: 'neon', neon: 'shock' };
         const next = cycle[current] || 'shock';
         document.querySelector(`input[name="infoTheme"][value="${next}"]`).checked = true;
         setActiveThemePill(next);
@@ -153,6 +153,7 @@ function bindEvents() {
                 const radio = document.querySelector(`input[name="infoTheme"][value="${theme}"]`);
                 if (radio) radio.checked = true;
                 setActiveThemePill(theme);
+                if (state.generatedPost) regenerateInfographic();
             }
         });
     });
@@ -488,6 +489,30 @@ TYPOGRAPHY LAYOUT (top to bottom):
 TYPOGRAPHY STYLE: Bold condensed or regular geometric sans-serif (Futura Bold / Helvetica Neue Bold / Montserrat ExtraBold style), pure black (#111111) on pure white (#FFFFFF), very large point size, generous line-height, slightly loose tracking.
 
 PHOTO STYLE: Photorealistic interior photograph, very slight 3/4 perspective angle, soft natural light from the left, warm LED underglow at the sign base, clean minimal background wall. No people, no brand logos, no watermarks.`;
+        } else if (theme === 'roadsign') {
+            imagePrompt = `A photorealistic urban photograph shot from street level looking straight ahead down a wide multi-lane city road. An overpass or bridge spans the road in the middle distance. Mounted on the underside of the overpass, centered across all lanes, is a large rectangular LED highway message board — the kind used for traffic advisories. The sign has a thick black metal housing and border. The LED matrix display glows with bright amber/orange dot-matrix text on a pure black background.
+
+SIGN TEXT: The sign displays exactly this message in large LED dot-matrix ALL-CAPS lettering, centered and word-wrapped naturally across 2–3 lines to fill the panel: "${headline}"
+
+LED TEXT STYLE: Classic amber/orange dot-matrix LED characters, each letter formed by a grid of glowing dots, very bright against the black panel, slight glow/bloom effect around the letters. No other text, no icons.
+
+SCENE: Urban city environment — multiple lanes of traffic (cars seen from behind, driving away from camera), city buildings flanking both sides of the road, overcast or dusk sky. Slight wide-angle perspective. Photorealistic, cinematic, no watermarks, no logos, no people's faces visible.`;
+        } else if (theme === 'cylinder') {
+            imagePrompt = `A photorealistic photograph of a large freestanding cylindrical column or advertising pillar in an open urban plaza or corporate courtyard. The cylinder is approximately 2 metres tall and wide, with a smooth white or off-white surface and polished chrome or brushed steel rims at the top and bottom edge. The column stands on a clean stone-paved plaza floor; glass office buildings or a modern corporate facade are softly visible in the background.
+
+SIGN TEXT: The curved white face of the cylinder displays ONLY the following text, printed in very large bold ALL-CAPS black sans-serif typeface, centered both vertically and horizontally on the cylinder face: "${headline}"
+
+TYPOGRAPHY: Extremely large, heavy black sans-serif (similar to Impact, Helvetica Neue Black, or Gotham Ultra). Text wraps naturally across multiple lines to fill the cylinder face. Characters are crisp black on pure white. No icons, no decorations, no secondary text — only the headline.
+
+PHOTO STYLE: Photorealistic, slight low-angle shot looking up slightly at the column, soft overcast daylight, subtle ambient shadow on the paved ground. No people, no brand logos, no watermarks.`;
+        } else if (theme === 'neon') {
+            imagePrompt = `A photorealistic photograph of a square acrylic or clear glass sign panel hanging by a thin cord or rope from above, positioned in front of a large window at dusk or evening. Outside the window, blurred trees and street lights are softly visible. The panel is mounted with small chrome screws at each corner.
+
+SIGN TEXT: The panel displays ONLY the following text as bright red neon tube lettering, bold ALL-CAPS, left-aligned with a generous left margin, wrapping naturally across multiple lines to fill the panel face: "${headline}"
+
+NEON STYLE: Red neon glass tubes formed into each letter, glowing intensely with a warm red-pink light. Strong neon glow and bloom effect radiating from each letter onto the surrounding acrylic surface. The neon color is vivid red (#FF2244) with a soft pink halo. No other colors, no icons, no secondary text.
+
+ATMOSPHERE: The neon text reflects and mirrors faintly on the window glass behind the panel. The room behind the camera is dark, making the neon the primary light source. Bokeh city/nature background through the window. Photorealistic, moody, cinematic. No people, no brand logos, no watermarks.`;
         } else {
             imagePrompt = `A clean, editorial-style infographic in portrait format. Light grey or off-white background with subtle paper or linen texture — professional editorial layout.
 
@@ -533,7 +558,7 @@ Style: modern editorial magazine quality, blue (#0077B5) and dark grey typograph
 
         // Update infographic wrapper background to match theme
         const wrapper = els.infographicCard.querySelector('.infographic-wrapper');
-        const bgMap = { shock: '#0a0e1a', dark: '#0d1b2a', light: '#f0f4f8', sign: '#e8e8e8' };
+        const bgMap = { shock: '#0a0e1a', dark: '#0d1b2a', light: '#f0f4f8', sign: '#e8e8e8', roadsign: '#2a1a1a', cylinder: '#d0d0d0', neon: '#0d0005' };
         wrapper.style.background = bgMap[theme] || '#0d1b2a';
         refreshPromptsCard();
 

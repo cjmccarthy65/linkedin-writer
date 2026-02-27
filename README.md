@@ -2,7 +2,7 @@
 
 Generate professional, engaging LinkedIn posts in your unique writing style using AI. Includes automatic infographic creation, web research, post analysis, and draft management — all from a clean, no-install web app.
 
-![LinkedIn Writer screenshot](screenshots/app-screenshot.png)
+![LinkedIn Writer screenshot](screenshots/screencapture-localhost-3000-2026-02-27-10_21_52.png)
 
 ## Features
 
@@ -18,22 +18,43 @@ Generate professional, engaging LinkedIn posts in your unique writing style usin
 
 <table>
   <tr>
+    <td colspan="3" align="center"><b>Cinematic</b></td>
+  </tr>
+  <tr>
     <td align="center"><b>Shock</b></td>
     <td align="center"><b>Cinematic Dark</b></td>
     <td align="center"><b>Cinematic Light</b></td>
-    <td align="center"><b>Sign</b></td>
   </tr>
   <tr>
     <td><img src="screenshots/shock.png" width="180"/></td>
     <td><img src="screenshots/cinematic-dark.png" width="180"/></td>
     <td><img src="screenshots/cinematic-light.png" width="180"/></td>
-    <td><img src="screenshots/sign.png" width="180"/></td>
   </tr>
   <tr>
     <td>Dark bg, fiery orange/gold, high-impact editorial</td>
     <td>Near-black, gold accents, cinematic illustration</td>
     <td>Clean off-white, professional editorial layout</td>
-    <td>Minimalist typographic white sign on wall</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><b>Real World</b></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Wall Sign</b></td>
+    <td align="center"><b>City Sign</b></td>
+    <td align="center"><b>Cylinder Sign</b></td>
+    <td align="center"><b>Neon Sign</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/sign.png" width="180"/></td>
+    <td><img src="screenshots/City.png" width="180"/></td>
+    <td><img src="screenshots/Cylinder.png" width="180"/></td>
+    <td><img src="screenshots/neon.png" width="180"/></td>
+  </tr>
+  <tr>
+    <td>Minimalist typographic white sign on interior wall</td>
+    <td>LED dot-matrix highway board on urban overpass</td>
+    <td>Bold text on white cylindrical column in city plaza</td>
+    <td>Red neon tube lettering on acrylic panel in window</td>
   </tr>
 </table>
 
