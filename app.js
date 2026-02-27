@@ -36,6 +36,7 @@ const state = {
         useHashtags: true,
         showPrompts: false,
         stylePost: DEFAULT_STYLE_POST,
+        roleContext: '',
     },
 };
 
@@ -159,6 +160,12 @@ function bindEvents() {
     });
     const defaultTheme = document.querySelector('input[name="infoTheme"]:checked');
     if (defaultTheme) setActiveThemePill(defaultTheme.value);
+
+    // Auto-save role context on blur
+    els.roleContext.addEventListener('blur', () => {
+        state.settings.roleContext = els.roleContext.value.trim();
+        localStorage.setItem('li_settings', JSON.stringify(state.settings));
+    });
 
     // Post output char count
     els.postOutput.addEventListener('input', updateCharCount);
@@ -763,6 +770,7 @@ function loadSettings() {
     els.chkHashtags.checked = state.settings.useHashtags;
     els.chkShowPrompts.checked = state.settings.showPrompts;
     els.stylePost.value = state.settings.stylePost || DEFAULT_STYLE_POST;
+    els.roleContext.value = state.settings.roleContext || '';
 
     onProviderChange();
     updateLengthLabel();
@@ -781,6 +789,7 @@ function saveSettings() {
     state.settings.useHashtags = els.chkHashtags.checked;
     state.settings.showPrompts = els.chkShowPrompts.checked;
     state.settings.stylePost = els.stylePost.value.trim() || DEFAULT_STYLE_POST;
+    state.settings.roleContext = els.roleContext.value.trim();
 
     localStorage.setItem('li_settings', JSON.stringify(state.settings));
 
