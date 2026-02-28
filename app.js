@@ -144,7 +144,7 @@ function bindEvents() {
     // Retheme infographic — cycle through all themes
     els.rethemeBtn.addEventListener('click', () => {
         const current = document.querySelector('input[name="infoTheme"]:checked').value;
-        const cycle = { shock: 'dark', dark: 'light', light: 'sign', sign: 'cylinder', cylinder: 'neon', neon: 'shock' };
+        const cycle = { shock: 'dark', dark: 'light', light: 'tech', tech: 'sign', sign: 'cylinder', cylinder: 'neon', neon: 'shock' };
         const next = cycle[current] || 'shock';
         document.querySelector(`input[name="infoTheme"][value="${next}"]`).checked = true;
         setActiveThemePill(next);
@@ -531,6 +531,17 @@ SIGN TEXT: The panel displays ONLY the following text as bright red neon tube le
 NEON STYLE: Red neon glass tubes formed into each letter, glowing intensely with a warm red-pink light. Strong neon glow and bloom effect radiating from each letter onto the surrounding acrylic surface. The neon color is vivid red (#FF2244) with a soft pink halo. No other colors, no icons, no secondary text.
 
 ATMOSPHERE: The neon text reflects and mirrors faintly on the window glass behind the panel. The room behind the camera is dark, making the neon the primary light source. Bokeh city/nature background through the window. Photorealistic, moody, cinematic. No people, no brand logos, no watermarks.`;
+        } else if (theme === 'tech') {
+            imagePrompt = `A high-tech futuristic infographic in portrait format. Deep midnight navy-black background (#050a15) layered with subtle glowing circuit board traces, hexagonal grid patterns, and faint scan-line overlays — like a holographic heads-up display projected in a dark operations center.
+
+EXACT LAYOUT (top to bottom):
+1. HEADER: A glowing electric-blue horizontal accent line, then the bold headline in large clean white sans-serif with electric blue (#00d4ff) highlights on key words: "${headline}"
+2. VISUAL ELEMENT: A dramatic central graphic — a glowing data sphere or holographic ring structure radiating electric blue and cyan light, floating on the dark background, conveying scale and advanced technology
+3. THREE PANELS: Three equal cards with glowing electric blue (#00d4ff) borders and very dark semi-transparent fills. Each card has a small glowing tech icon, bold white label, and concise grey description. LEFT: "${t1}" | CENTER: "${t2}" | RIGHT: "${t3}"
+4. DATA STRIP: A full-width band with subtle digital texture, showing a key insight or metric in large bold white type
+5. FOOTER: A thin glowing cyan line, then a closing statement in white
+
+STYLE: Futuristic sci-fi editorial, electric blue (#00d4ff) and cyan (#00ffee) accents on near-black (#050a15), neon glow effects on panel borders and text highlights, crisp geometric sans-serif typography, circuit traces and hexagonal grid as background texture. No brand logos, no watermarks, no human faces, print-ready portrait format.`;
         } else {
             imagePrompt = `A clean, editorial-style infographic in portrait format. Light grey or off-white background with subtle paper or linen texture — professional editorial layout.
 
@@ -576,7 +587,7 @@ Style: modern editorial magazine quality, blue (#0077B5) and dark grey typograph
 
         // Update infographic wrapper background to match theme
         const wrapper = els.infographicCard.querySelector('.infographic-wrapper');
-        const bgMap = { shock: '#0a0e1a', dark: '#0d1b2a', light: '#f0f4f8', sign: '#e8e8e8', roadsign: '#2a1a1a', cylinder: '#d0d0d0', neon: '#0d0005' };
+        const bgMap = { shock: '#0a0e1a', dark: '#0d1b2a', light: '#f0f4f8', sign: '#e8e8e8', roadsign: '#2a1a1a', cylinder: '#d0d0d0', neon: '#0d0005', tech: '#050a15' };
         wrapper.style.background = bgMap[theme] || '#0d1b2a';
         refreshPromptsCard();
 

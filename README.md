@@ -2,7 +2,7 @@
 
 Generate professional, engaging LinkedIn posts in your unique writing style using AI. Includes automatic infographic creation, web research, post analysis, and draft management — all from a clean, no-install web app.
 
-![LinkedIn Writer screenshot](screenshots/screencapture-localhost-3000-2026-02-28-07_26_17.png)
+![LinkedIn Writer screenshot](screenshots/screencapture-localhost-3000-2026-02-28-14_02_15.png)
 
 ## Features
 
@@ -19,22 +19,25 @@ Generate professional, engaging LinkedIn posts in your unique writing style usin
 
 <table>
   <tr>
-    <td colspan="3" align="center"><b>Cinematic</b></td>
+    <td colspan="4" align="center"><b>Cinematic</b></td>
   </tr>
   <tr>
     <td align="center"><b>Shock</b></td>
     <td align="center"><b>Cinematic Dark</b></td>
     <td align="center"><b>Cinematic Light</b></td>
+    <td align="center"><b>Tech</b></td>
   </tr>
   <tr>
     <td><img src="screenshots/shock.png" width="180"/></td>
     <td><img src="screenshots/cinematic-dark.png" width="180"/></td>
     <td><img src="screenshots/cinematic-light.png" width="180"/></td>
+    <td><img src="screenshots/tech.png" width="180"/></td>
   </tr>
   <tr>
     <td>Dark bg, fiery orange/gold, high-impact editorial</td>
     <td>Near-black, gold accents, cinematic illustration</td>
     <td>Clean off-white, professional editorial layout</td>
+    <td>Dark HUD-style, electric blue/cyan glow, sci-fi circuit aesthetic</td>
   </tr>
   <tr>
     <td colspan="3" align="center"><b>Real World</b></td>
