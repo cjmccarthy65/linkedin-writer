@@ -2,7 +2,7 @@
 
 Generate professional, engaging LinkedIn posts in your unique writing style using AI. Includes automatic infographic creation, web research, post analysis, and draft management — all from a clean, no-install web app.
 
-![LinkedIn Writer screenshot](screenshots/screencapture-localhost-3000-2026-02-27-10_21_52.png)
+![LinkedIn Writer screenshot](screenshots/screencapture-localhost-3000-2026-02-28-07_26_17.png)
 
 ## Features
 
@@ -11,6 +11,7 @@ Generate professional, engaging LinkedIn posts in your unique writing style usin
 - **Web Research** — Fetch and summarize article content to ground your posts in real data
 - **Post Analysis** — Score and analyze existing LinkedIn posts for engagement potential
 - **Draft Management** — Save, browse, and reload posts across sessions
+- **Independent Regeneration** — Regenerate just the post or just the infographic separately, without re-running the full pipeline
 - **Multiple AI Providers** — Supports both OpenAI (GPT-4o) and Anthropic (Claude 3.5)
 - **Customizable Style** — Set your tone, length, emoji/hashtag preferences, and provide a sample post to match your voice
 

@@ -65,6 +65,7 @@ const els = {
     infographicCanvas: $('infographicCanvas'),
     downloadBtn: $('downloadBtn'),
     rethemeBtn: $('rethemeBtn'),
+    regenerateInfographicBtn: $('regenerateInfographicBtn'),
     chkShowPrompts: $('chkShowPrompts'),
     promptsCard: $('promptsCard'),
     promptPostSystem: $('promptPostSystem'),
@@ -127,13 +128,18 @@ function bindEvents() {
 
     // Generate Post
     els.generateBtn.addEventListener('click', handleGenerate);
-    els.regenerateBtn.addEventListener('click', handleGenerate);
+    els.regenerateBtn.addEventListener('click', () => handleGenerate({ postOnly: true }));
 
     // Copy
     els.copyBtn.addEventListener('click', copyPost);
 
     // Download infographic
     els.downloadBtn.addEventListener('click', downloadInfographic);
+
+    // Regenerate infographic only (keep current post)
+    els.regenerateInfographicBtn.addEventListener('click', () => {
+        if (state.generatedPost) regenerateInfographic();
+    });
 
     // Retheme infographic — cycle through all themes
     els.rethemeBtn.addEventListener('click', () => {
@@ -251,7 +257,7 @@ async function fetchArticleText(url) {
 }
 
 // ── Post Generation ───────────────────────────────────────────────
-async function handleGenerate() {
+async function handleGenerate({ postOnly = false } = {}) {
     const topic = els.topic.value.trim();
     const postTitle = els.postTitle.value.trim();
     const role = els.roleContext.value.trim();
@@ -342,12 +348,14 @@ Write a compelling LinkedIn post based on the above. Output ONLY the post text�
         // 5. Save draft if checked
         if (els.chkDraft.checked) saveDraft(topic || 'Untitled', postText);
 
-        // 6. Generate infographic if checked
-        if (els.chkInfographic.checked) {
-            const theme = document.querySelector('input[name="infoTheme"]:checked').value;
-            await generateInfographic(postText, topic, role, theme);
-        } else {
-            els.infographicCard.style.display = 'none';
+        // 6. Generate infographic if checked (skip when regenerating post only)
+        if (!postOnly) {
+            if (els.chkInfographic.checked) {
+                const theme = document.querySelector('input[name="infoTheme"]:checked').value;
+                await generateInfographic(postText, topic, role, theme);
+            } else {
+                els.infographicCard.style.display = 'none';
+            }
         }
 
         refreshPromptsCard();
