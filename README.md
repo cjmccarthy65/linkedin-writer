@@ -31,13 +31,13 @@ Generate professional, engaging LinkedIn posts in your unique writing style usin
     <td><img src="screenshots/shock.png" width="180"/></td>
     <td><img src="screenshots/cinematic-dark.png" width="180"/></td>
     <td><img src="screenshots/cinematic-light.png" width="180"/></td>
-    <td><img src="screenshots/tech.png" width="180"/></td>
+    <td><img src="screenshots/Tech1.png" width="180"/></td>
   </tr>
   <tr>
     <td>Dark bg, fiery orange/gold, high-impact editorial</td>
     <td>Near-black, gold accents, cinematic illustration</td>
     <td>Clean off-white, professional editorial layout</td>
-    <td>Dark HUD-style, electric blue/cyan glow, sci-fi circuit aesthetic</td>
+    <td>6-panel grid around central AI humanoid, electric blue glow, city skyline</td>
   </tr>
   <tr>
     <td colspan="3" align="center"><b>Real World</b></td>

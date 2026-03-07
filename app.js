@@ -532,16 +532,23 @@ NEON STYLE: Red neon glass tubes formed into each letter, glowing intensely with
 
 ATMOSPHERE: The neon text reflects and mirrors faintly on the window glass behind the panel. The room behind the camera is dark, making the neon the primary light source. Bokeh city/nature background through the window. Photorealistic, moody, cinematic. No people, no brand logos, no watermarks.`;
         } else if (theme === 'tech') {
-            imagePrompt = `A high-tech futuristic infographic in portrait format. Deep midnight navy-black background (#050a15) layered with subtle glowing circuit board traces, hexagonal grid patterns, and faint scan-line overlays — like a holographic heads-up display projected in a dark operations center.
+            imagePrompt = `A high-tech futuristic infographic poster in portrait format. Deep navy-black background (#050a15) filled with subtle circuit board traces, floating blue particle effects, and faint energy lines radiating from the center.
 
-EXACT LAYOUT (top to bottom):
-1. HEADER: A glowing electric-blue horizontal accent line, then the bold headline in large clean white sans-serif with electric blue (#00d4ff) highlights on key words: "${headline}"
-2. VISUAL ELEMENT: A dramatic central graphic — a glowing data sphere or holographic ring structure radiating electric blue and cyan light, floating on the dark background, conveying scale and advanced technology
-3. THREE PANELS: Three equal cards with glowing electric blue (#00d4ff) borders and very dark semi-transparent fills. Each card has a small glowing tech icon, bold white label, and concise grey description. LEFT: "${t1}" | CENTER: "${t2}" | RIGHT: "${t3}"
-4. DATA STRIP: A full-width band with subtle digital texture, showing a key insight or metric in large bold white type
-5. FOOTER: A thin glowing cyan line, then a closing statement in white
+EXACT LAYOUT:
 
-STYLE: Futuristic sci-fi editorial, electric blue (#00d4ff) and cyan (#00ffee) accents on near-black (#050a15), neon glow effects on panel borders and text highlights, crisp geometric sans-serif typography, circuit traces and hexagonal grid as background texture. No brand logos, no watermarks, no human faces, print-ready portrait format.`;
+1. TOP TITLE BAR: Large bold ALL-CAPS headline centered at the very top, framed by thin glowing electric-blue (#00d4ff) accent lines above and below. Key words rendered in bright electric blue, remaining words in white. Text: "${headline}"
+
+2. MAIN BODY — three horizontal rows, each row containing: a dark panel on the LEFT, the central figure in the MIDDLE, and a dark panel on the RIGHT:
+   - Each dark panel has a glowing electric-blue (#00d4ff) border, a bold ALL-CAPS white section header, and three bullet items — each bullet has a small vivid colored icon on the left and a short white label.
+   - LEFT panels (top to bottom): "${t1}" as header of the top-left panel | "${t2}" as header of the middle-left panel | a third insight as the bottom-left panel header
+   - RIGHT panels (top to bottom): complementary insights matching the left panels
+   - CENTER STRIP: A dramatic AI humanoid robot or cyborg — three-quarter or profile view of a futuristic android head and upper torso. The skull is partially transparent, revealing glowing blue neural circuit patterns inside. Electric blue eyes. Blue energy radiates outward from the figure, connecting visually to the surrounding panels. Cinematic sci-fi illustration style.
+
+3. FOOTER BANNER: Full-width bold banner with a deep blue gradient fill (#0a1a3a to #001030), bold ALL-CAPS white text — a short punchy closing statement derived from the topic.
+
+4. BOTTOM CITYSCAPE: Directly below the footer, a dark futuristic city skyline silhouette with vertical light beams rising upward into the composition, fading into the background.
+
+STYLE: Professional sci-fi editorial infographic. Electric blue (#00d4ff) glowing panel borders and highlights. Deep navy (#050a15) background. Bold condensed white sans-serif for headers. Small vivid icons (blue, orange, green, gold) for bullets. Circuit traces and particle fields as atmosphere. No brand logos, no watermarks, print-ready portrait format.`;
         } else {
             imagePrompt = `A clean, editorial-style infographic in portrait format. Light grey or off-white background with subtle paper or linen texture — professional editorial layout.
 
